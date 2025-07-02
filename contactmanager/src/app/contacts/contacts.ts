@@ -21,6 +21,7 @@ export class Contacts implements OnInit {
 
   error = '';
   success = '';
+  selectedFile: File | null = null;
 
   constructor(private contactService: ContactService, private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
@@ -43,6 +44,17 @@ export class Contacts implements OnInit {
       }
     );
   }
+  addContact(f: NgForm) {
+
+  }
+  onFileSelected(event: Event): void 
+  {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) 
+      {
+        this.selectedFile = input.files[0];
+  }
+}
 
   resetAlerts(): void {
     this.error = '';

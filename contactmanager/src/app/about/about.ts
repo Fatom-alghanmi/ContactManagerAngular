@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router'; // Needed for routerLink to work
 
 @Component({
   selector: 'app-about',
-  imports: [],
+  standalone: true, // You must declare this if you're not using NgModule
+  imports: [RouterModule], // This enables routerLink in the template
   templateUrl: './about.html',
-  styleUrl: './about.css'
+  styleUrls: ['./about.css'] // Fix: should be style**Urls**, not styleUrl
 })
-export class About {
-
-}
+export class About {}

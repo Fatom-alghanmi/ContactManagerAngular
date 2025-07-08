@@ -63,13 +63,42 @@ export class Contacts implements OnInit {
     );
   }
 
-  editContact(firstName: any, lastName: any, emailAddress: any, phone: any, status: any, dob: any, imageName: any, typeID: any, contactID: any)
+  editContact(firstName: any, lastName: any, emailAddress: any, phone: any, contactID: any)
   {
-    
+    this.resetAlerts();
+    console.log(firstName.value);
+    this.contactService.edit({
+      firstName: firstName.value, lastName: lastName.value, emailAddress: emailAddress.value, phone: phone.value, contactID: +contactID.value,
+      status: ''
+    }).subscribe(
+        (res) => {
+          this.success = 'Successfully edited';
+        },
+        (err) => {
+          this.error = err.message;
+        }
+          
+        
+      );
+
   }
+
    deleteContact(contactID: number)
    {
+    this.resetAlerts();
 
+    this.contactService.delete(contactID)
+    .subscribe(
+      (res) => {
+        this.contacts = this.contacts.filter(function(item) {
+          return item['contactID'] && +item['contactID'] !== contactID;
+        });
+        this.success = "Successfully deleted";
+      },
+      (err) => {
+        this.error = err.message;
+      }
+    );
    }
 
   uploadFile(): void {

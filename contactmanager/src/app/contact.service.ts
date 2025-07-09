@@ -11,6 +11,7 @@ import { Contact } from './contact';
 
 export class ContactService {
     baseUrl = 'http://localhost/contactmanagerangular/contactapi';
+    apiUrl: any;
 
     constructor(private http: HttpClient)
     {
@@ -41,6 +42,9 @@ export class ContactService {
     delete(contactID: any)
     {
         const params = new HttpParams().set('contactID', contactID.toString());
-        return this.http.delete(`${this.baseUrl}/delete`, {params: params});
+        return this.http.get(`${this.baseUrl}/delete.php?contactID=${contactID}`);
+
+
+        //return this.http.delete(`${this.baseUrl}/delete`, {params: params});
     }
 }
